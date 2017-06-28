@@ -47,8 +47,21 @@ class AVL(object):
             node.rightChild = self.rightRotation(node.rightChild)
             return self.rightRotation(node)
 
+    def traverse(self):
+        if self.root:
+            self.traverseInorder(self.root)
 
+    def traverseInorder(self, node):
 
+        if node.leftChild:
+            self.traverseInorder(node.leftChild)
+
+        print("%s" % node.data)
+
+        if node.rightChild:
+            self.traverseInorder(node.rightChild)
+
+        print("%s" % node.data)
 
     def calcHeight(self, node):
 
@@ -95,3 +108,10 @@ class AVL(object):
                                    self.calcHeight(tempRightChild.rightChild)) + 1
 
         return tempRightChild
+
+avl = AVL()
+avl.insert(10)
+avl.insert(20)
+avl.insert(30)
+avl.insert(40)
+avl.traverse()
