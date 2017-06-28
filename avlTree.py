@@ -12,10 +12,13 @@ class AVL(object):
         self.root = None
 
     def insert(self, data):
+
         self.root = self.insertNode(data, self.root)
 
+
+
     def insertNode(self, data, node):
-        if not node:
+        if node is None:
             return Node(data)
 
         if data < node.data:
@@ -30,6 +33,7 @@ class AVL(object):
     def violation(self, data, node):
 
         balance = self.calcBalance(node)
+
         if balance > 1 and data < node.leftChild.data:
             print("Left left heavy..")
             return self.rightRotation(node)
@@ -46,10 +50,14 @@ class AVL(object):
             print("Right left heavy..")
             node.rightChild = self.rightRotation(node.rightChild)
             return self.rightRotation(node)
+        return node
+
 
     def traverse(self):
         if self.root:
             self.traverseInorder(self.root)
+        else:
+            print("none root")
 
     def traverseInorder(self, node):
 
@@ -61,19 +69,19 @@ class AVL(object):
         if node.rightChild:
             self.traverseInorder(node.rightChild)
 
-        print("%s" % node.data)
 
     def calcHeight(self, node):
 
-        if not node:
+        if node is None:
             return -1
+
         return node.height
 
     # return greater than 1 : rotation이 필요하다 -> left heavy tree -> right rotation
     #       < -1 right heacy -> left lotation
     def calcBalance(self, node):
 
-        if not node:
+        if node is None:
             return 0
 
         return self.calcHeight(node.leftChild) - self.calcHeight(node.rightChild)
@@ -114,4 +122,5 @@ avl.insert(10)
 avl.insert(20)
 avl.insert(30)
 avl.insert(40)
+
 avl.traverse()
